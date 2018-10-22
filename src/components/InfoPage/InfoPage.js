@@ -1,4 +1,7 @@
 import React from 'react';
+import ParkMap from '../ParkMap/ParkMap'
+// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,9 +10,12 @@ import React from 'react';
 
 const InfoPage = () => (
   <div>
-    <p>
-      Info Page
-    </p>
+    
+      <ParkMap />
+      
+   
+            Parks near you
+    
   </div>
 );
 
