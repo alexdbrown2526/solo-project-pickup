@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
 // import GoogleMapReact from 'google-map-react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-
+import './ParkMap.css'
+import axios from 'axios'
+import Geolocation from 'react-geolocation';
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+// places apikey: AIzaSyBcMd1o8uQGD7pvA-G9kIYCMHRDvakw50U
+
 
 
 class ParkMap extends Component {
@@ -12,8 +17,7 @@ class ParkMap extends Component {
         selectedPlace: {},
       };
 
-      //Clicking on a marker will display a piece of information
-      //declared in the Marker title
+      //CLicking on a marker will show info abouot the location
 
       onMarkerClick = (props, marker) => {
           this.setState({
@@ -32,10 +36,24 @@ class ParkMap extends Component {
               })
           }
       }
-   
 
-    
+   
+      getCurrentLocation = () => {
+          navigator.geolcation.getCurrentPosition((position) => {
+              console.log(position.coords);
+              
+          })
+      }
         
+      getUsers = () => {
+          axios({
+              method: 'GET',
+              url: '/api/username'
+          }).then(response => {
+              console.log(response);
+              
+          })
+      }
         
 // showCurrentLocation = () => {
 //     if (navigator.geolocation) {
@@ -56,15 +74,35 @@ class ParkMap extends Component {
 //     }
 //   }
 
-    // componentDidMount(){
-    //     this.showCurrentLocation();
-    // }
+//     componentDidMount(){
+//         axios ({
+//             method: 'GET',
+//             url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyBcMd1o8uQGD7pvA-G9kIYCMHRDvakw50U',
+//             type: ['park'],
+//             radius: 10000
+//         }).then((results) => {
+//             console.log(results);
+                
+        
+//     })
+// }
+
+      componentDidMount(){
+          this.getUsers();
+      }
 
 
 
     render(){
+        const style = {
+            height: '60vh',
+            width: '60vw'
+        }
         return(
+
+            
             <Map google={this.props.google}
+            style = {style}
             onClick={this.onMapClick}
             initialCenter={{
                 lat: 44.977753,
@@ -75,9 +113,15 @@ class ParkMap extends Component {
                     name={'Current location'} />
 
             <Marker onClick={this.onMarkerClick}
-            title={'The marker`s title will appear as a tooltip.'}
             name={'Northeast Park'}
-            position={{lat:45.0031, lng: -93.2413}} />
+            position={{lat:45.0031, lng: -93.2413}}
+            />
+
+            <Marker onClick={this.onMarkerClick}
+            name={'Van Cleve Park'}
+            position={{lat:44.9868, lng: -93.2314}} />
+
+
     
             <InfoWindow 
             marker={this.state.activeMarker}
@@ -85,7 +129,12 @@ class ParkMap extends Component {
                 <div>
                   <h1>{this.state.selectedPlace.name}</h1>
                 </div>
+                <ul>
+                    <li>John</li>
+                    <li>George</li>
+                </ul>
             </InfoWindow>
+           
           </Map>
         )
     }
