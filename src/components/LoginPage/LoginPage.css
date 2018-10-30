@@ -1,0 +1,64 @@
+
+.whole {
+    margin-top: 2%;
+    background-image: url('http://hockeygods.com/system/gallery_images/4797/original.jpg?1291331651');
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Login-Card {
+    padding-bottom: 10%;
+    padding-top: 5%;
+	position: relative   ;
+	z-index: 1;
+	display: flex;
+	overflow: hidden;
+	backface-visibility: hidden;
+	flex-direction: column;
+	margin: 0 auto;
+	max-width: 260px;
+	border: 0;
+	border-radius: 2px;
+	box-shadow: 0 3px 4px 0 fade(brown, 14%),
+              0 3px 3px -3px fade(rgb(59, 41, 41), 20%),
+              0 2px 8px 0 fade(brown, 12%);
+}
+
+
+h1 {
+    text-align: center;
+    padding-bottom: 10%;
+}
+
+.password-content{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+
+}
+
+.username-content {
+    padding-bottom: 10%;
+    text-align: center;
+
+}
+
+.login-button {
+    text-align: center;
+    margin-bottom: 10%;
+
+}
+
+.register-button{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+
+
+
+  
+
+ 

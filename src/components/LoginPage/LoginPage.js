@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import './LoginPage.css'
+import TextField from '@material-ui/core/TextField'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import Lock from '@material-ui/icons/Lock'
 
 class LoginPage extends Component {
   state = {
@@ -31,7 +37,8 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      
+      <div className="whole">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -40,49 +47,72 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
+        <Card className="Login-Card">
         <form onSubmit={this.login}>
           <h1>Login</h1>
-          <div>
+          
+          <div className="username-content">
             <label htmlFor="username">
-              Username:
-              <input
+
+              <br/>
+
+              <TextField
+              placeholder="Username"
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
+                
               />
+                            <AccountCircle />
+
             </label>
           </div>
-          <div>
+          
+          <div className ="password-content">
             <label htmlFor="password">
-              Password:
-              <input
+              
+              <br/>
+              
+              <TextField
+              placeholder="Password"
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
+              <Lock />
             </label>
           </div>
-          <div>
-            <input
+          <br/>
+          
+          <div className="login-button">
+            <Button
+            variant="contained"
+            color="primary"
               className="log-in"
               type="submit"
               name="submit"
-              value="Log In"
-            />
+              value="Log In">
+              Log In
+            </Button>
+            
           </div>
-        </form>
+          
+        
         <center>
-          <button
+          <Button variant="contained" color="secondary"
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Register
-          </button>
+            Or Create an Account
+          </Button>
         </center>
+        </form>
+        </Card>
       </div>
+      
     );
   }
 }

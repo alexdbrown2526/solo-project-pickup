@@ -1,155 +1,147 @@
-import React, {Component} from 'react'
-import {withGoogleMap, withScriptjs, GoogleMap, Marker}  from 'react-google-maps'
-import './ParkMap.css'
-import ParkMarker from '../ParkMarker/ParkMarker'
-import axios from 'axios'
-import Geolocation from 'react-geolocation';
-import Roster from '../Roster/Roster';
-
-// places apikey: AIzaSyBcMd1o8uQGD7pvA-G9kIYCMHRDvakw50U
 
 
+import React, { Component } from 'react';
+import Map from '../Map/Map';
+import axios from 'axios';
+import Park from '../ParkList/ParkList';
+import { Button, Form, FormControl } from 'react-bootstrap';
+import InfoWindowMap from '../InfoWindowMap/InfoWindowMap';
+import SearchBox from '../SearchBox/SearchBox'
 
- const MapComponent = withScriptjs(withGoogleMap((props) => 
-    <GoogleMap
-    defaultZoom={14}
-    defaultCenter={{ lat:44.986656, lng: -93.258133}}>
-    {props.isMarkerShown && <Marker position = {{lat: -34.397, lng: 150.644}}/>}
-    
-    </GoogleMap>
- ))
+// import FormControl from '@material-ui/core/FormControl'
+// import Form from '@material-ui/core/Form'
 
- 
-    
-class ParkMap extends Component {
 
-    state = {
-        isMarkerShown: true
-    }
-                        
-    
-    // state = {
-    //     showingInfoWindow: false,
-    //     activeMarker: {},
-    //     selectedPlace: {},
-        
-    //   };
+class MapInfo extends Component{
+		state={
+			searchText:'',
+            venues:[],
+            showingInfoWindow: false,
+            activeMarker: {},
+            selectedPlace: {},
+			// location :{
+			// 	lat:44.9778,
+			// 	lng:-93.2650
+			// }
+			longitude: -93.2650,
+			latitude: 44.9778	
+			
+		}
 
-      //CLicking on a marker will show info about the location
-
-    //   onMarkerClick = (props, marker) => {
-    //       this.setState({
-    //           showingInfoWindow: true,
-    //           activeMarker: marker,
-    //           selectedPlace: props
-    //       })
-    //   }
-
-      //when a marker infowindow is open, clicking anywhere on
-      //the map will close the infowidow
-    //   onMapClick = () => {
-    //       if (this.state.showingInfoWindow) {
-    //           this.setState({
-    //               showingInfoWindow: false
-    //           })
-    //       }
-    //   }
-
-   
-    //   getCurrentLocation = () => {
-    //       window.navigator.geolocation.getCurrentPosition((position) => {
-    //           console.log(position.coords);
-    //           console.log(this.state)
-              
-    //                 this.setState({
-    //                     currentLocation: {
-    //                     lat: position.coords.latitude,
-    //                     lng: position.coords.longitude
-    //                     }
-    //                 });
-                
-    //       })
-    //   }
-
-        
-    //   getUsers = () => {
-    //       axios({
-    //           method: 'GET',
-    //           url: '/api/username'
-    //       }).then(response => {
-    //           console.log(response);
-              
-    //       })
-    //   }
-    //   componentDidMount(){
-    //     this.getUsers();
+	// componentWillMount(){
+	// 	this.getLocation();
     // }
-
-    //   checkIn = () => {
-    //       console.log('button workin');
-          
-    //   }
-        
-
-    componentDidMount(){
-        console.log("working here")
-        // let key = 'AIzaSyBcMd1o8uQGD7pvA-G9kIYCMHRDvakw50U';
-
-        // if(window.google && window.google.maps) {
-        //     let map = document.getElementById('googleMap')
-        //     let placesService = new window.google.maps.places.PlacesService(map);
-        //     placesService.nearbySearch({
-        //         location: {lat: 44.977753,lng: -93.2650108},
-        //         radius: 100,
-        //         type: ['restroom']
-        //     }, callback)
-
-        //     function callback(res, status) {
-        //         console.log(res);
-        //         console.log(status)
-        //     }
-
-        // }
-        
-        axios ({
-            method: 'GET',
-            url: `https://cors.io/?https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=45.130214,-93.320129&radius=100000&type=park&key=AIzaSyBcMd1o8uQGD7pvA-G9kIYCMHRDvakw50U`,
-        }).then((results) => {
-            console.log(results.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
-
-      
-
-
-
-   render(){
-            return(
-
-<MapComponent
-  isMarkerShown={this.state.isMarkerShown}
-  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyANjAGaZns_r2hpABkO5n0iWuded4wYprA&v=3.exp&libraries=geometry,drawing,places"
-  loadingElement={<div style={{ height: `100%` }} />}
-  containerElement={<div style={{ height: `400px` }} />}
-  mapElement={<div style={{ height: `100%` }} />}
-//   lat={values.latitude}
-//   lng={values.longitude}
-/>
-                
-                
-                
-                
-                
-               
-
-                
-            )
-    }
     
+          //CLicking on a marker will show info about the location
+
+		setPosition = () => {
+			this.setState({
+				latitude: position.coords.latitude,
+				longitude: position.coords.longitude
+			})
+		}
+
+      onMarkerClick = (props, marker) => {
+          this.setState({
+              showingInfoWindow: true,
+              activeMarker: marker,
+              selectedPlace: props
+          })
+      }
+
+    //   when a marker infowindow is open, clicking anywhere on
+    //   the map will close the infowidow
+      onMapClick = () => {
+          if (this.state.showingInfoWindow) {
+              this.setState({
+                  showingInfoWindow: false
+              })
+          }
+      }
+
+	onTextChange = (event) =>{
+		this.setState({[event.target.name]: event.target.value})
+	
+	}
+
+	onSubmit = (event) =>{
+		axios.get(`https:/cors.io/?https://api.foursquare.com/v2/venues/search?client_id=FNWWXKNLELPPEIQ5PZHXTZ3RN3RCOG1EPVID4SYEJTVXKEC4&client_secret=TWOZ3KSWFOADK5C4JCN2KDQMVVSRKIB4ORHA2IV3GMLLQ5QD
+        &ll=${this.state.location.lat},${this.state.location.lng}&query=${this.state.searchText}&v=20189988`)
+		    .then(res=>{
+		      const venues=res.data.response.venues;
+		      console.log(res);
+			  this.setState({
+                  venues:venues
+                })
+		    })
+		    .catch(err=>{
+		      console.log(err)
+		    })
+    }
+          getUsers = () => {
+          axios({
+              method: 'GET',
+              url: '/api/username'
+          }).then(response => {
+              console.log(response);
+              
+          })
+      }
+      componentDidMount(){
+		if(navigator.geolocation) {
+			navigation.geolocation.getCurrentPosition(this.setPosition)
+		} else {
+			console.log('Geolocate will not work with your browser');
+			
+		}
+        this.getUsers();
+    }
+   
+  	// getLocation = () => {
+  	// 	navigator.geolocation.getCurrentPosition((position)=>{  			
+  	// 		this.setState({
+  	// 			location:{
+  	// 				lat:position.coords.latitude,
+  	// 				lng:position.coords.longitude
+  	// 			}
+  	// 		})
+  	// 	})
+  	// }
+
+	render(){
+		 
+		return(
+
+			<div>			
+				
+                <InfoWindowMap />
+				<SearchBox />
+                
+				<Form className='form'>
+				<FormControl
+					className='search-field'
+					name='searchText'
+					value={this.state.searchText}
+					placeholder='Find'
+					onChange={this.onTextChange}
+				 />
+				<Button 
+					className='button'
+					onClick={this.onSubmit}
+					>Find</Button>
+				</Form>		
+                <Map
+				  center={this.state.location}
+				  markers={this.state.venues}
+				  containerElement={<div style={{ height: `500px`,width:`75%` }} />}
+                  mapElement={<div style={{ height: `100%`,width:`100%` }} />}
+                   activeMarker={this.state.activeMarker}
+                   isMarkerShown={this.state.isMarkerShown}
+				/>		
+				<Park venues={this.state.venues}/>
+			</div>
+		)	
+	}	
 }
 
-
-export default ParkMap
+export default MapInfo;

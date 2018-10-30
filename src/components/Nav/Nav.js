@@ -4,32 +4,49 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
+import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+
 const Nav = (props) => (
   <div className="nav">
+  <AppBar position="static">
+    <Toolbar>
+    {/* <Button>
     <Link to="/home">
       <h2 className="nav-title">Pickup</h2>
     </Link>
+    </Button> */}
     <div className="nav-right">
+    <Button>
       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
+      </Button>
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Info Page
+          <Button><Link className="nav-link" to="/info">
+            Map
           </Link>
-          <LogOutButton className="nav-link"/>
+          </Button>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
+      <Button>
       <Link className="nav-link" to="/about">
         About
       </Link>
+      </Button>
+      <LogOutButton className="nav-link"/>
+
+      
     </div>
+    </Toolbar>
+      </AppBar>
   </div>
 );
 

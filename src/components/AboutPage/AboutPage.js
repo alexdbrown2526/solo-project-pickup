@@ -9,7 +9,9 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Pickup is an application designed for people with similar 
+        interests to meetup. To View nearby locations and users, create an
+        account and login.
       </p>
     </div>
   </div>

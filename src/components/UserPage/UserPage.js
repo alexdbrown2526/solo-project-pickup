@@ -11,9 +11,11 @@ class UserPage extends Component {
     return (
       <div>
         <h1 id="welcome">
-          Welcome, { this.props.user.username }!
+          Welcome to Pickup, { this.props.user.username }!
+          
         </h1>
-        <p>Your ID is: {this.props.user.id}</p>
+        <h2>Checkout the Map tab to find activities near you.</h2>
+        {/* <p>Your ID is: {this.props.user.id}</p> */}
         <LogOutButton className="log-in" />
       </div>
     );
