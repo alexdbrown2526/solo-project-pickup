@@ -3,7 +3,6 @@ import Map from '../Map/Map';
 import axios from 'axios';
 import ParkList from '../ParkList/ParkList';
 import { Button, Form, FormControl } from 'react-bootstrap';
-import Modal from '../ClickModal/ClickModal'
 // import '../../App.css';
 
 
@@ -75,12 +74,7 @@ class Home extends Component{
 		return(
 
 			<div>			
-				<Map
-				  center={this.state.location}
-				  markers={this.state.venues}
-				  containerElement={<div style={{ height: `400px`,width:`100%` }} />}
-				  mapElement={<div style={{ height: `100%`,width:`100%` }} />}
-				/>
+				
 				<Form className='form'>
 				<FormControl
 					className='search-field'
@@ -93,7 +87,13 @@ class Home extends Component{
 					bsStyle='info' 
 					onClick={this.onTextSubmit}
 					>Find</Button>
-				</Form>				
+				</Form>			
+				<Map
+				  center={this.state.location}
+				  markers={this.state.venues}
+				  containerElement={<div style={{ height: `400px`,width:`100%` }} />}
+				  mapElement={<div style={{ height: `100%`,width:`100%` }} />}
+				/>	
 				<ParkList venues={this.state.venues}/>
 			</div>
 		)	

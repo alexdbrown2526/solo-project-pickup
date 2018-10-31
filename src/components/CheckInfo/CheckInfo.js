@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 
 
-class SearchBox extends Component {
+class CheckInfo extends Component {
 	render(){
 		return(<div></div>)
 	}
 }
 
 
-export default SearchBox
+export default CheckInfo

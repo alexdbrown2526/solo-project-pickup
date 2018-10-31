@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button'
 import '../App/App.css';
 import axios from 'axios'
 import Modal from '../ClickModal/ClickModal'
+import TextField from '@material-ui/core/TextField';
+
 
 class ParkList extends Component {
   constructor(props){
@@ -28,9 +30,8 @@ class ParkList extends Component {
   checkIn = (event) => {
     event.preventDefault();
     console.log('button workin');
-    axios({
-      method: ''
-    })
+    
+   
 
     
 
@@ -49,12 +50,16 @@ class ParkList extends Component {
         </Button>
 
         <Modal show={this.state.isOpen}
-        
-          onClose={this.toggleModal}>
+        onClose={this.toggleModal}>
           
           <h2>{venue.name} {venue.location.address}</h2>
-          <h2>User's Currently Here</h2>
+          <h2>User's Currently Here <Button color="primary" variant="contained" onClick={this.checkIn}>Check In</Button></h2>
+          <div className="checkInDiv">
+          <TextField placeholder="Name of Activity"/>          
+          </div>
+          
           <table>
+            <tbody>
             <tr>
               <th>User</th>
               <th>Activity</th>
@@ -67,6 +72,7 @@ class ParkList extends Component {
               <td>Lisa</td>
               <td>Soccer</td>
             </tr>
+            </tbody>
           </table>
          
         </Modal>       
