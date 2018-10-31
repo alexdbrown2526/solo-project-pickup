@@ -1,5 +1,6 @@
 import React from 'react';
-import ParkMap from '../ParkMap/ParkMap'
+import Map from '../Map/Map'
+import ParkHome from '../ParkHome/ParkHome'
 // import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
@@ -11,7 +12,7 @@ import ParkMap from '../ParkMap/ParkMap'
 const InfoPage = () => (
   <div>
     
-      <ParkMap />
+      <ParkHome />
       
    
             Parks near you
