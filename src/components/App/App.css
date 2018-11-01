@@ -13,3 +13,8 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.modal {
+    max-height: 100%;
+overflow-y: auto;
+}

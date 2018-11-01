@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button'
+import '../App/App.css'
 
 class Modal extends React.Component {
   render() {
@@ -24,7 +25,8 @@ class Modal extends React.Component {
       maxWidth: 500,
       minHeight: 300,
       margin: '0 auto',
-      padding: 30
+      padding: 30,
+      
     };
 
     return (

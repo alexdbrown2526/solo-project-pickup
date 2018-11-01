@@ -19,14 +19,7 @@ class Home extends Component{
 
 	componentWillMount(){
 		console.log(this.state);
-		axios({
-			method:'GET',
-			url: '/api/username'
-		}).then((response) => {
-			console.log(response.data);
-			
-			
-		})
+		
 		
 		this.getLocation();
 	}
@@ -83,6 +76,8 @@ class Home extends Component{
 					onChange={this.onTextChange}
 				 />
 				<Button 
+				color="primary"
+				variant="contained"
 					className='button'
 					bsStyle='info' 
 					onClick={this.onTextSubmit}

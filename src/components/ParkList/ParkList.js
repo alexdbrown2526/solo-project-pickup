@@ -11,7 +11,10 @@ class ParkList extends Component {
   constructor(props){
     super(props);
     
-      this.state = {isOpen: false}
+      this.state = {
+      isOpen: false,
+      users: []
+    }
   }
 
   toggleModal = () => {
@@ -22,14 +25,28 @@ class ParkList extends Component {
 
   componentDidMount(){
     axios({
-      method: 'POST',
-      url:'/api/location'
-    })
+			method:'GET',
+			url: '/api/username'
+		}).then((response) => {
+      console.log(response.data);
+      console.log(this.state.users);
+      this.setState({
+        users: response.data
+      })
+      
+			
+			
+		})
   }
 
   checkIn = (event) => {
     event.preventDefault();
     console.log('button workin');
+
+    axios({
+      method: 'POST',
+      url: '/api/'
+    })
     
    
 
@@ -55,23 +72,28 @@ class ParkList extends Component {
           <h2>{venue.name} {venue.location.address}</h2>
           <h2>User's Currently Here <Button color="primary" variant="contained" onClick={this.checkIn}>Check In</Button></h2>
           <div className="checkInDiv">
-          <TextField placeholder="Name of Activity"/>          
+          <TextField placeholder="Name of Activity"/>  
+          <TextField placeholder="Number of Guests" />        
           </div>
-          
+          {JSON.stringify(this.state.users)}
           <table>
-            <tbody>
+            
+            <thead>
             <tr>
               <th>User</th>
+              <th>Guests</th>
               <th>Activity</th>
             </tr>
-            <tr>
-              <td>Jack</td>
-              <td>Basketball</td>
-            </tr>
-            <tr>
-              <td>Lisa</td>
-              <td>Soccer</td>
-            </tr>
+            </thead> 
+            <tbody>
+            {this.state.users.map((person) =>{
+                return(<tr key={person.id}>
+                <td>{person.username}</td>
+                <td>{person.number_of_guests}</td>
+                <td>{person.activity}</td>
+                </tr>)
+              })}
+            
             </tbody>
           </table>
          
