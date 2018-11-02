@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Map from '../Map/Map';
 import axios from 'axios';
 import ParkList from '../ParkList/ParkList';
-import { Button, Form, FormControl } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 // import '../../App.css';
 
 
@@ -65,9 +66,10 @@ class Home extends Component{
 		return(
 
 			<div>			
-				
-				<Form className='form'>
-				<FormControl
+				<form className="form">
+				<TextField className="textfield"
+					type="text"
+					fullWidth
 					className='search-field'
 					name='searchText'
 					value={this.state.searchText}
@@ -80,7 +82,7 @@ class Home extends Component{
 					bsStyle='info' 
 					onClick={this.onTextSubmit}
 					>Find</Button>
-				</Form>			
+					</form>
 				<Map
 				  center={this.state.location}
 				  markers={this.state.venues}

@@ -69,6 +69,16 @@ class ParkList extends Component {
     })
 
  }
+ 
+//  checkOut = (event) => {
+//    console.log('button workin');
+//    event.preventDefault();
+   
+//    axios ({
+//      method: 'DELETE',
+//      url: '/api/username'
+//    })
+//  }
 
 
 handleActivityChange = (event) => {

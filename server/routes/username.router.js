@@ -34,4 +34,12 @@ router.post('/', (req, res) => {
     
 });
 
+router.delete('/:id', (req, res) => {
+    pool.query(`DELETE FROM "activity_info" WHERE "person_id" = $1;`, [req.params.id])
+        .then(res.sendStatus(200))
+        .catch(error => {
+            res.sendStatus(500);
+        })
+});
+
 module.exports = router;
