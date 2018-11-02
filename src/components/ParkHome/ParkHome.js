@@ -14,7 +14,6 @@ class Home extends Component{
 				lat:44.9778,
 				lng:-93.2650
 			}
-			
 		}
 
 	componentWillMount(){
@@ -26,7 +25,6 @@ class Home extends Component{
 
 	onTextChange = (event) =>{
 		this.setState({[event.target.name]: event.target.value})
-	
 	}
 
 
