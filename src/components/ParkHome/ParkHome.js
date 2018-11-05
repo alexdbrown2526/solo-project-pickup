@@ -74,6 +74,7 @@ class Home extends Component{
 					name='searchText'
 					value={this.state.searchText}
 					onChange={this.onTextChange}
+					placeholder="Find nearby places"
 				 />
 				<Button 
 				color="primary"

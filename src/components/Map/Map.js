@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow} from 'react-google-maps';
 
 class Map extends Component{
+   
+
+   
+
+    markerClick = (marker) => {
+        console.log(marker);
+        
+    }
 
     // toggleInfoWindow = () => {
     //     if(location === null) {
@@ -25,7 +33,22 @@ class Map extends Component{
             }
 
           }
-            return <Marker key={venue.id} {...marker} />
+            return <Marker
+            onClick={ () => this.markerClick(venue)}
+            
+            key={venue.id} {...marker} >
+
+            <InfoWindow>
+
+                <div>
+                <h2>{venue.name}</h2>
+                <p>{venue.location.address}</p>
+
+</div>
+                   </InfoWindow>
+
+
+            </Marker>
     })
 
   
@@ -36,7 +59,7 @@ class Map extends Component{
         <GoogleMap
           defaultZoom={13}        
             defaultCenter={this.props.center}>
-          <div>{markers}</div>
+          {markers}
           
         </GoogleMap>       
       )
